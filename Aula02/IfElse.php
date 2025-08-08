@@ -14,7 +14,7 @@ if ($media >= 7 && $frequencia >= 75 || $nome == "Enzo Enrico"){
     echo "\nO aluno possui uma frequencia de: $frequencia%";
 }
 else {
-    echo "\nALUNO REPROVADO!!!";
+                                                          echo "\nALUNO REPROVADO!!!";
     echo "\nAluno reprovado com media: $media";
     echo "\nO aluno possui uma frequencia de: $frequencia%";
 
