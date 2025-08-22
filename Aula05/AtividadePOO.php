@@ -14,6 +14,14 @@ class Cachorro{
         $this->sexo = $sexo;
         $this->castrado = $castrado;
     }
+
+    public function latir() {
+        echo "O cachorro: $this->nome está latindo.\n";
+    }
+
+    public function marcarTerritorio() {
+        echo "O cachorro: $this->nome da raça $this->raça está marcando territorio.\n";
+    }
 }
 
 $cachorro1 = new Cachorro("Pucca", "12", "shitzu", false, "femea");
@@ -27,7 +35,8 @@ $cachorro8 = new Cachorro("Amora", "6", "Beagle", false, "femea");
 $cachorro9 = new Cachorro("Jorlan", "8", "Rottweiler", true, "macho");
 $cachorro10 = new Cachorro("Bela", "5", "Poodle", false, "femea");
 
-
+$cachorro1 -> latir ();
+$cachorro2 -> marcarTerritorio ();
 
 
 ?>
