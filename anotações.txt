@@ -1,0 +1,8 @@
+Atributos:
+Public ->> São Atributos púnblicos que podem ser acessados de fora de uma classe
+
+Private ->> São Atributos privados que podem ser acessados somente por dentro da classe
+
+Getter ->> Método padrão para ler ou **OBTER** valores de um atributo privados
+
+Setter ->> Método padrão para **ALTERAR** ou modificar valores d eum atributo privado
