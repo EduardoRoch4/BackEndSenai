@@ -1,7 +1,9 @@
 <?php
 
+// ===================================================================
+//                     Exercicio 1. Criação básica
+// ===================================================================
 
-// ______________xExercicio 1. Criação básica______________
 // class Carro {
 //     private $marca;
 //     private $modelo;
@@ -51,8 +53,10 @@
 
 
 
+// ===================================================================
+//                     Exercicio 2. Pessoa com atributos
+// ===================================================================
 
-// ______________Exercicio 2. Pessoa com atributos______________
 // class Pessoa {
 //     private $nome;
 //     private $idade;
@@ -107,8 +111,10 @@
 
 
 
+// ===================================================================
+//                     Exercicio 3. Validação em setter
+// ===================================================================
 
-// ______________Exercicio 3. Validação em setter______________
 // class Aluno {
 //     private $nome;
 //     private $nota;
@@ -159,6 +165,128 @@
 
 // // Exibindo as informações
 // echo "Aluno -\n" . $Aluno1->exibirInfo();
+
+
+
+
+
+// ===================================================================
+//                        Exercicio 4 - Encapsulamento de Produto
+// ===================================================================
+// class Produto {
+//     // Atributos privados
+//     private $nome;
+//     private $preco;
+//     private $estoque;
+
+//     // ======== SETTERS ========
+//     public function setNome($nome) {
+//         $this->nome = ucfirst(strtolower($nome)); // Primeira letra maiúscula
+//     }
+
+//     public function setPreco($preco) {
+//         // Verifica se o preço é positivo
+//         if ($preco >= 0) {
+//             $this->preco = $preco;
+//         } else {
+//             $this->preco = 0;
+//         }
+//     }
+
+//     public function setEstoque($estoque) {
+//         // Verifica se o estoque é maior ou igual a zero
+//         if ($estoque >= 0) {
+//             $this->estoque = $estoque;
+//         } else {
+//             $this->estoque = 0;
+//         }
+//     }
+
+//     // ======== GETTERS ========
+//     public function getNome() {
+//         return $this->nome;
+//     }
+
+//     public function getPreco() {
+//         return $this->preco;
+//     }
+
+//     public function getEstoque() {
+//         return $this->estoque;
+//     }
+// }
+
+// // ======== TESTE DO OBJETO ========
+
+// // Criando um produto
+// $produto1 = new Produto();
+
+// // Definindo os valores usando setters
+// $produto1->setNome("Notebook");
+// $produto1->setPreco(3500.50);
+// $produto1->setEstoque(12);
+
+// // Exibindo informações com getters
+// echo "O produto " . $produto1->getNome() . " custa R$ " . $produto1->getPreco() .
+//      " e possui " . $produto1->getEstoque() . " unidades em estoque.\n";
+
+
+
+
+
+// ===================================================================
+//                        ATV 5 - CLASSE FUNCIONARIO
+// ===================================================================
+// class Funcionario {
+//     // Atributos privados
+//     private $nome;
+//     private $salario;
+
+//     // ======== SETTERS ========
+//     public function setNome($nome) {
+//         $this->nome = ucfirst(strtolower($nome)); // Primeira letra maiúscula
+//     }
+
+//     public function setSalario($salario) {
+//         // Garantir que o salário seja positivo
+//         if ($salario >= 0) {
+//             $this->salario = $salario;
+//         } else {
+//             $this->salario = 0;
+//         }
+//     }
+
+//     // ======== GETTERS ========
+//     public function getNome() {
+//         return $this->nome;
+//     }
+
+//     public function getSalario() {
+//         return $this->salario;
+//     }
+// }
+
+// // ======== TESTE DO OBJETO ========
+
+// // Criando um funcionário
+// $func = new Funcionario();
+
+// // Definindo valores iniciais
+// $func->setNome("Carlos");
+// $func->setSalario(2500);
+
+// // Exibindo os valores iniciais
+// echo "Funcionário: " . $func->getNome() . " - Salário: R$ " . $func->getSalario() . "\n";
+
+// // ======== ALTERANDO DADOS ========
+
+// // Modificando nome e salário
+// $func->setNome("Roberta");
+// $func->setSalario(3200);
+
+// // Exibindo os valores modificados
+// echo "Funcionário: " . $func->getNome() . " - Salário: R$ " . $func->getSalario() . "\n";
+
 
 
 ?>
