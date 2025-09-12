@@ -69,7 +69,18 @@ class Pentagono implements Forma {
 }
 
 
+class Hexagono implements Forma {
+    private $lado;
 
+    public function __construct($lado) {
+        $this->lado = $lado;
+    }
+
+    // Método sem parâmetros, usando o atributo da classe
+    public function calcularArea() {
+        return (3 * sqrt(3) * $this->lado * $this->lado) / 2;
+    }
+}
 
 
 // Exemplo de uso:
@@ -78,6 +89,14 @@ echo "Área do quadrado: " . $quadrado->calcularArea() . "\n";
 
 $circulo = new Circulo(3);
 echo "Área do círculo: ". $circulo->calcularArea() . "\n";
+
+$Pentagono = new Pentagono(6);
+echo "Área do Pentagono: " . $Pentagono->calcularArea() . "\n";
+
+$hexagono = new Hexagono(6);
+$areaFormatada = number_format($hexagono->calcularArea(), 2);
+echo "Área do Hexágono: " . $areaFormatada . "\n";
+
 
 
 

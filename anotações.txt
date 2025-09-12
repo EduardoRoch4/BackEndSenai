@@ -17,7 +17,7 @@ Setter ->> Método padrão para **ALTERAR** ou modificar valores d eum atributo 
     Private NomeDoAtributo: Métodos e atributos privados para acesso somente dentro da 
     classe, utilizamos os Getters e Setters para acessa-los.
 
-    Protected NomeDoAtributo: métodos e atributos protegidos para acessosomente 
+    Protected NomeDoAtributo: métodos e atributos protegidos para acesso somente 
     da classes e de suas classes filhas.
 
     Pacotes: Sintaxe logo ou no inicio do código, que atribui de onde os arquivos 
@@ -27,3 +27,15 @@ Setter ->> Método padrão para **ALTERAR** ou modificar valores d eum atributo 
 
     Caso tenham mais arquivos que formam o BackEnd de uma página Web e possuem a mesma raiz
     o namespace será o mesmo
+
+
+
+==============================
+         Polimorfismo:
+==============================
+*O termo Polimorfismo significa "Várias formas".
+Associando isso a Programação Orientada a Objetos, o conceito se trata de várias classes
+e suas instâncias(Objetos) respondendo a um mesmo método de formas diferentes. No Exemplo de 
+interface da Aula09, temos um método CalcularArea() que responde de forma difenrente a classe Quadrado,
+a classe Pentagono e a classe Circulo. Isso quer dizer que a função é a mesma - calcular a area de forma geometrica - mas a 
+operação muda de acordo com a figura.
