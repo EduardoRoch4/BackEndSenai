@@ -31,9 +31,6 @@ function fazerSom(Animal $animal) {
     echo $animal->fazerSom() . PHP_EOL;
 }
 
-$Dog = new Cachorro();
-$Dog -> fazerSom();
-
 fazerSom(new Gato());
 fazerSom(new Vaca());
 
