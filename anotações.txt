@@ -39,3 +39,16 @@ e suas instâncias(Objetos) respondendo a um mesmo método de formas diferentes.
 interface da Aula09, temos um método CalcularArea() que responde de forma difenrente a classe Quadrado,
 a classe Pentagono e a classe Circulo. Isso quer dizer que a função é a mesma - calcular a area de forma geometrica - mas a 
 operação muda de acordo com a figura.
+
+
+Relacionamento entre classes: a referência para análise será sempre os objetos daquela determinada classe.
+
+Associação: Conexão entre duas classes, onde os objetos podem interagir compartilhando informações. Exemplo: Pessoa e Empresa.
+Pode-se escolher um objeto de cada classe para análise -----> Joaozinho trabalha na Zaccaria nesse tipo de relacionamento as classes 
+podem podem existir indepedentemente uma da outra.
+
+Agregação: Conexão entre duas classes, onde uma delas é uma parte da outra, mas o objeto "parte" pode existir indepedentemente do objeto "todo". Exemplo: Carro e motorista
+------> Hyron pode dirigir um Del Ray, sendo uma "parte" que compõe o carro como um todo, mas pode existir indepedentemente do carro.
+
+Composição: É uma conexão mais forte entre classes, onde a existência do objeto "parte" é diretamente ligada ao objeto "todo" isso quer dizer que se o todo deixa de existir, a 
+"parte" também deixa. Exemplo: Carro e motor. Relacionando os objetos -----> o carro Audi R8 pode conter um motor V12 5.2 aspirado, mas o motor deixa de existir se o carro tambem deixa.

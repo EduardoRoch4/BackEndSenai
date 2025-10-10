@@ -42,35 +42,36 @@ class Passaro {
     public function getGenero() { return $this->genero; }
 
     public function cantar() {
-        return (($this->getGenero() == "masculino") ? "O " : "A ") . $this->getEspecies() . " está cantando: ". $this->getSom() . "\n";
+        return (($this->getGenero() == "masculino") ? "O " : "A ") . $this->getEspecies() . " está cantando: " . $this->getSom() . "\n";
     }
 
     public function mostrarinfo() {
-        return "Espécie: " . $this->getEspecies() . 
-        "\nCor: ". $this->getCor() . 
-        "\nHabitat: " . $this->getHabitat() . 
-        "\nAlimentação: " . $this->getAlimentacao() . 
-        "\nEstado de Conservação: " . $this->getEstadoConservacao() . 
-        "\nSom: ". $this->getSom(). "\n";
+        return "Espécie: " . $this->getEspecies() .
+            "\nCor: " . $this->getCor() .
+            "\nHabitat: " . $this->getHabitat() .
+            "\nAlimentação: " . $this->getAlimentacao() .
+            "\nEstado de Conservação: " . $this->getEstadoConservacao() .
+            "\nSom: " . $this->getSom() . "\n";
     }
 
     public function comer() {
-        return (($this->getGenero() == "masculino") ? "O " : "A ") . $this->getEspecies(). " está comendo: ". $this->getAlimentacao() . "\n";
+        return (($this->getGenero() == "masculino") ? "O " : "A ") . $this->getEspecies() . " está comendo: " . $this->getAlimentacao() . "\n";
     }
 }
 
-class AveExotica extends Passaro { 
+class AveExotica extends Passaro {
     private $origem;
 
     public function __construct($especies, $cor, $habitat, $alimentacao, $estado_conservacao, $som, $genero, $origem) {
+        parent::__construct($especies, $cor, $habitat, $alimentacao, $estado_conservacao, $som, $genero);
         $this->origem = $origem;
     }
 
     public function cantar() {
-        return "A ave " . $especie . " canta diferente: " . $this->getSom() . "\n";
+        return "A ave " . $this->getEspecies() . " canta diferente: " . $this->getSom() . "\n";
     }
 
-    public function comer(): int {
+    public function comer(): string {
         return "A ave exótica está comendo: " . $this->getAlimentacao() . "\n";
     }
 
@@ -79,7 +80,7 @@ class AveExotica extends Passaro {
     }
 }
 
-$papagaio = new AveExotica( 
+$papagaio = new AveExotica(
     "Papagaio",
     "Verde com detalhes vermelhos",
     "Floresta tropical",
