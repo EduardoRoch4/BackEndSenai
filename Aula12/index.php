@@ -1,5 +1,4 @@
     <?php 
-
         require_once "CRUD.php";
         require_once "AlunoDAO.php";
     // Objeto da classe 
