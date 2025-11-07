@@ -56,20 +56,39 @@ class BebidaDAO {
     }
 
     // UPDATE
-    public function atualizarBebida($nome, $novoValor, $novaQtde) {
-        if (isset($this->bebidasArray[$nome])) {
-            $this->bebidasArray[$nome]->setValor($novoValor);
-            $this->bebidasArray[$nome]->setQtde($novaQtde);
-            $this->salvarArquivo();
+    public function atualizarBebida($nomeAntigo, $nomeNovo, $categoria, $volume, $valor, $qtde) {
+    $bebidas = $this->lerBebidas();
+
+    foreach ($bebidas as $bebida) {
+        if ($bebida->getNome() === $nomeAntigo) {
+            $bebida->setNome($nomeNovo);
+            $bebida->setCategoria($categoria);
+            $bebida->setVolume($volume);
+            $bebida->setValor($valor);
+            $bebida->setQtde($qtde);
         }
     }
 
+    $this->salvarArquivo($bebidas);
+}
+
+
+
     // DELETE
-    public function deletarBebida($nome) {
-        if (isset($this->bebidasArray[$nome])) {
-            unset($this->bebidasArray[$nome]);
+    // DELETE
+public function deletarBebida($nome) {
+    foreach ($this->bebidasArray as $index => $bebida) {
+        if (trim($bebida->getNome()) === trim($nome)) {
+            unset($this->bebidasArray[$index]);
+            $this->bebidasArray = array_values($this->bebidasArray); // Reindexa o array
             $this->salvarArquivo();
+            return true;
         }
     }
+    return false;
+}
+
+
+
 }
 ?>

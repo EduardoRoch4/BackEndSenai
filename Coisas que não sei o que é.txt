@@ -1,0 +1,13 @@
+Coisas que não sei o que é: 
+
+bebidaController.php - 
+__DIR__
+
+BebidaDAO.php - 
+file_put_contents
+            
+json_encode($dados, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE)
+
+index.php -
+$id = urlencode($bebida->getNome());
+
