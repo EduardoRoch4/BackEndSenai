@@ -1,94 +1,95 @@
-<?php 
-
-require_once __DIR__ . '/Bebida.php';
+<?php
+require_once 'Bebida.php';
+require_once 'Connection.php';
 
 class BebidaDAO {
-    private $bebidasArray = [];
-    private $arquivoJson = 'bebidas.json';
+    private $conn;
 
     public function __construct() {
-        if (file_exists($this->arquivoJson)) {
-            $conteudoArquivo = file_get_contents($this->arquivoJson);
-            $dadosArquivosEmArray = json_decode($conteudoArquivo, true);
+        $this->conn = Connection::getInstance();
 
-            if ($dadosArquivosEmArray) {
-                foreach ($dadosArquivosEmArray as $nome => $info) {
-                    $this->bebidasArray[$nome] = new Bebida(
-                        $info['nome'],
-                        $info['categoria'],
-                        $info['volume'],
-                        $info['valor'],
-                        $info['qtde']
-                    );
-                }
-            }
-        }
+        // Cria a tabela se não existir
+        $this->conn->exec("
+            CREATE TABLE IF NOT EXISTS bebidas (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                nome VARCHAR(100) NOT NULL UNIQUE,
+                categoria VARCHAR(50) NOT NULL,
+                volume VARCHAR(20) NOT NULL,
+                valor DECIMAL(10,2) NOT NULL,
+                qtde INT NOT NULL
+            )
+        ");
     }
-
-    private function salvarArquivo() {
-        $dados = [];
-
-        foreach ($this->bebidasArray as $nome => $bebida) {
-            $dados[$nome] = [
-                'nome' => $bebida->getNome(),
-                'categoria' => $bebida->getCategoria(),
-                'volume' => $bebida->getVolume(),
-                'valor' => $bebida->getValor(),
-                'qtde' => $bebida->getQtde()
-            ];
-        }
-
-        file_put_contents(
-            $this->arquivoJson,
-            json_encode($dados, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE)
-        );
-    }
+    
 
     // CREATE
     public function criarBebida(Bebida $bebida) {
-        $this->bebidasArray[$bebida->getNome()] = $bebida;
-        $this->salvarArquivo();
+        $stmt = $this->conn->prepare("
+            INSERT INTO bebidas (nome, categoria, volume, valor, qtde)
+            VALUES (:nome, :categoria, :volume, :valor, :qtde)
+        ");
+        $stmt->execute([
+            ':nome' => $bebida->getNome(),
+            ':categoria' => $bebida->getCategoria(),
+            ':volume' => $bebida->getVolume(),
+            ':valor' => $bebida->getValor(),
+            ':qtde' => $bebida->getQtde()
+        ]);
     }
 
     // READ
     public function lerBebidas() {
-        return $this->bebidasArray;
+        $stmt = $this->conn->query("SELECT * FROM bebidas ORDER BY nome");
+        $result = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $result[] = new Bebida(
+                $row['nome'],
+                $row['categoria'],
+                $row['volume'],
+                $row['valor'],
+                $row['qtde']
+            );
+        }
+        return $result;
     }
 
     // UPDATE
-    public function atualizarBebida($nomeAntigo, $nomeNovo, $categoria, $volume, $valor, $qtde) {
-    $bebidas = $this->lerBebidas();
-
-    foreach ($bebidas as $bebida) {
-        if ($bebida->getNome() === $nomeAntigo) {
-            $bebida->setNome($nomeNovo);
-            $bebida->setCategoria($categoria);
-            $bebida->setVolume($volume);
-            $bebida->setValor($valor);
-            $bebida->setQtde($qtde);
-        }
+    public function atualizarBebida($nomeOriginal, $novoNome, $categoria, $volume, $valor, $qtde) {
+        $stmt = $this->conn->prepare("
+            UPDATE bebidas
+            SET nome = :novoNome, categoria = :categoria, volume = :volume, valor = :valor, qtde = :qtde
+            WHERE nome = :nomeOriginal
+        ");
+        $stmt->execute([
+            ':novoNome' => $novoNome,
+            ':categoria' => $categoria,
+            ':volume' => $volume,
+            ':valor' => $valor,
+            ':qtde' => $qtde,
+            ':nomeOriginal' => $nomeOriginal
+        ]);
     }
 
-    $this->salvarArquivo($bebidas);
-}
-
-
-
     // DELETE
-    // DELETE
-public function deletarBebida($nome) {
-    foreach ($this->bebidasArray as $index => $bebida) {
-        if (trim($bebida->getNome()) === trim($nome)) {
-            unset($this->bebidasArray[$index]);
-            $this->bebidasArray = array_values($this->bebidasArray); // Reindexa o array
-            $this->salvarArquivo();
-            return true;
-        }
+    public function excluirBebida($nome) {
+        $stmt = $this->conn->prepare("DELETE FROM bebidas WHERE nome = :nome");
+        $stmt->execute([':nome' => $nome]);
     }
-    return false;
+
+    // BUSCAR POR NOME
+    public function buscarPorNome($nome) {
+        $stmt = $this->conn->prepare("SELECT * FROM bebidas WHERE nome = :nome LIMIT 1");
+        $stmt->execute([':nome' => $nome]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        if ($row) {
+            return new Bebida(
+                $row['nome'],
+                $row['categoria'],
+                $row['volume'],
+                $row['valor'],
+                $row['qtde']
+            );
+        }
+        return null;
+    }
 }
-
-
-
-}
-?>
