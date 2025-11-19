@@ -8,7 +8,7 @@ class connection{
                 $host = "localhost";
                 $dbname = "aula15";
                 $user = "root";
-                $pass = "1234";
+                $pass = "senaisp";
 
                 self::$instance = new PDO(
                     "mysql:host=$host;
