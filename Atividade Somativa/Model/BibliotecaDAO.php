@@ -10,21 +10,33 @@ class BibliotecaDAO {
         $this->conn = Connection::getInstance();
     }
 
-    // CREATE
-    public function criarLivro(Livro $livro) {
+// CREATE
+public function criarLivro(Livro $livro) {
+    // Primeiro verifica se já existe um livro com esse título
+    $sqlCheck = "SELECT COUNT(*) FROM livros WHERE titulo = :titulo";
+    $stmtCheck = $this->conn->prepare($sqlCheck);
+    $stmtCheck->execute([':titulo' => $livro->getTítulo()]);
+    $existe = $stmtCheck->fetchColumn();
 
-        $sql = "INSERT INTO livros (titulo, genero_literario, autor, ano_publicacao, qtde)
-                VALUES (:titulo, :genero, :autor, :ano, :qtde)";
-
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute([
-            ':titulo' => $livro->getTítulo(),
-            ':genero' => $livro->getGênero_Literario(),
-            ':autor'  => $livro->getAutor(),
-            ':ano'    => $livro->getAno_publicacao(),
-            ':qtde'   => $livro->getQtde()
-        ]);
+    if ($existe > 0) {
+        // Aqui você pode lançar uma exceção ou apenas retornar false
+        throw new Exception("Já existe um livro com o título '{$livro->getTítulo()}'!");
     }
+
+    // Se não existe, insere normalmente
+    $sql = "INSERT INTO livros (titulo, genero_literario, autor, ano_publicacao, qtde)
+            VALUES (:titulo, :genero, :autor, :ano, :qtde)";
+
+    $stmt = $this->conn->prepare($sql);
+    $stmt->execute([
+        ':titulo' => $livro->getTítulo(),
+        ':genero' => $livro->getGênero_Literario(),
+        ':autor'  => $livro->getAutor(),
+        ':ano'    => $livro->getAno_publicacao(),
+        ':qtde'   => $livro->getQtde()
+    ]);
+}
+
 
     // READ
     public function lerLivros() {

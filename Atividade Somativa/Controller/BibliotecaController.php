@@ -15,16 +15,26 @@ class BibliotecaController {
         return $this->dao->lerLivros();
     }
 
-    // CREATE
-    public function criar($titulo, $autor, $ano, $genero, $qtde) {
+public function criar($titulo, $autor, $ano, $genero, $qtde) {
+    try {
         $livro = new Livro($titulo, $autor, $ano, $genero, $qtde);
         $this->dao->criarLivro($livro);
+        return "Livro cadastrado com sucesso!";
+    } catch (Exception $e) {
+        return "Erro ao cadastrar: " . $e->getMessage();
     }
+}
+
 
     // UPDATE
     public function atualizar($tituloAntigo, $tituloNovo, $autor, $ano, $genero, $qtde) {
+    try {
         $this->dao->atualizarLivro($tituloAntigo, $tituloNovo, $genero, $autor, $ano, $qtde);
+        return "Livro atualizado com sucesso!";
+    } catch (Exception $e) {
+        return "Erro ao atualizar: " . $e->getMessage();
     }
+}
 
     // DELETE
     public function deletar($titulo) {
